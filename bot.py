@@ -1,5 +1,4 @@
 import math
-import os
 import random
 import sqlite3
 import logging
@@ -8,13 +7,15 @@ import time
 
 import telebot
 from telebot.async_telebot import AsyncTeleBot
+
+import config
 import phrases
 import command_handler
 from data.db_add import db_add_all, give_open_bonus
 from data.db_init import initialize_db
 
 logger = telebot.logger
-telebot.logger.setLevel(logging.ERROR)  # Outputs debug messages to console.
+telebot.logger.setLevel(logging.ERROR)
 
 
 class ExceptionHandler(telebot.ExceptionHandler):
@@ -26,7 +27,7 @@ class ExceptionHandler(telebot.ExceptionHandler):
 connect = sqlite3.connect('game.db', check_same_thread=False)
 cursor = connect.cursor()
 
-bot = AsyncTeleBot(os.environ.get('TOKEN'), exception_handler=ExceptionHandler())
+bot = AsyncTeleBot(config.TOKEN, exception_handler=ExceptionHandler())
 
 
 @bot.message_handler(commands=["help"])
