@@ -1,0 +1,5 @@
+version: '3.7'
+services:
+  bot:
+    build: .
+    image: sardorsharipov/dota_telegram_bot:latest
